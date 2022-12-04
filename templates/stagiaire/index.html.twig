@@ -1,0 +1,30 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}STAGIAIRES{% endblock %}
+
+{% block body %}
+
+<h1>STAGIAIRES</h1>
+
+<div class="example-wrapper"></div>
+    <table>
+        <thead>
+            <tr>
+                <th>STAGIAIRES</th>
+                <th>SEXE</th>     
+                <th>VILLE</th>        
+            </tr>
+        </thead>
+        <tbody>
+            {% for stagiaire in stagiaires %}
+                <tr>
+                    <td>{{ stagiaire.prenom ~' '~ stagiaire.nom }}</td>
+                    <td>{{ stagiaire.sexe }}</td>
+                    <td>{{ stagiaire.ville }}</td>
+                </tr> 
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

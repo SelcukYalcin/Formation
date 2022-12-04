@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}FORMATEURS{% endblock %}
+
+{% block body %}
+
+<H1>FORMATEURS</H1>
+
+<div class="example-wrapper">
+    <table>
+        <thead>
+            <tr>
+                <th>FORMATEUR</th>
+                <th>MAIL</th>
+                <th>TELEPHONE</th>     
+                <th>SEXE</th>     
+                <th>VILLE</th>        
+            </tr>
+        </thead>
+        <tbody>
+            {% for formateur in formateurs %}
+                <tr>
+                    <td>{{ formateur.prenom ~' '~ formateur.nom }}</td>
+                    <td>{{ formateur.email }}</td>
+                    <td>{{ formateur.telephone }}</td>
+                    <td>{{ formateur.sexe }}</td>
+                    <td>{{ formateur.ville }}</td>
+                </tr> 
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock %}

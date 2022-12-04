@@ -1,0 +1,23 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}CATEGORIES{% endblock %}
+
+{% block body %}
+
+<h1>CATEGORIES</h1>
+
+<div class="example-wrapper">
+    <table>
+        <tr>
+            <th> CATEGORIES</th>
+        </tr>
+        <tbody>
+            {% for categorie in categories %}
+               <tr>
+                    <td>{{ categorie.titreCat }}</td>
+                </tr> 
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+{% endblock %}
