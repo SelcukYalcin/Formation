@@ -8,12 +8,14 @@
 
 <div class="example-wrapper">
     <table>
-        <tr>
-            <th> CATEGORIES</th>
-        </tr>
+        <thead>
+            <tr>
+                <th>INTITULE</th>
+            </tr>
+        </thead>
         <tbody>
             {% for categorie in categories %}
-               <tr>
+                <tr>
                     <td>{{ categorie.titreCat }}</td>
                 </tr> 
             {% endfor %}

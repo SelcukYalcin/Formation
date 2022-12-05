@@ -24,9 +24,14 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `id` int NOT NULL AUTO_INCREMENT,
   `titre_cat` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table formationbdd.categorie : ~0 rows (environ)
+-- Listage des données de la table formationbdd.categorie : ~4 rows (environ)
+INSERT INTO `categorie` (`id`, `titre_cat`) VALUES
+	(1, 'BUREAUTIQUE'),
+	(2, 'DEW WEB'),
+	(3, 'COMMERCE'),
+	(4, 'COMPTABILITE');
 
 -- Listage de la structure de table formationbdd. doctrine_migration_versions
 CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
@@ -36,9 +41,10 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Listage des données de la table formationbdd.doctrine_migration_versions : ~1 rows (environ)
+-- Listage des données de la table formationbdd.doctrine_migration_versions : ~2 rows (environ)
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
-	('DoctrineMigrations\\Version20221202200705', '2022-12-02 20:09:52', 475);
+	('DoctrineMigrations\\Version20221202200705', '2022-12-02 20:09:52', 475),
+	('DoctrineMigrations\\Version20221204145405', '2022-12-04 14:54:16', 282);
 
 -- Listage de la structure de table formationbdd. formateur
 CREATE TABLE IF NOT EXISTS `formateur` (
@@ -51,13 +57,17 @@ CREATE TABLE IF NOT EXISTS `formateur` (
   `cp` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   `date_naissance` date NOT NULL,
   `adresse` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
+  `sexe` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table formationbdd.formateur : ~2 rows (environ)
-INSERT INTO `formateur` (`id`, `prenom`, `nom`, `telephone`, `email`, `ville`, `cp`, `date_naissance`, `adresse`) VALUES
-	(1, 'Mickael', 'MURMANN', '07087896548', 'murmann@gmail.com', 'STRASBOURG', '67100', '1986-11-14', 'Rue des Peupliers'),
-	(2, 'Stephane', 'SMAIL', '0708742554', 'smail@gmail.com', 'MULHOUSE', '68000', '1985-12-02', 'Rue des Champs');
+-- Listage des données de la table formationbdd.formateur : ~5 rows (environ)
+INSERT INTO `formateur` (`id`, `prenom`, `nom`, `telephone`, `email`, `ville`, `cp`, `date_naissance`, `adresse`, `sexe`) VALUES
+	(1, 'Mickael', 'MURMANN', '07087896548', 'murmann@gmail.com', 'STRASBOURG', '67100', '1986-11-14', 'Rue des Peupliers', 'M'),
+	(2, 'Stephane', 'SMAIL', '0708742554', 'smail@gmail.com', 'MULHOUSE', '68000', '1985-12-02', 'Rue des Champs', 'M'),
+	(3, 'Philippe ', 'BOURDON', '0696857448', 'bourdon@gmail.com', 'COLMAR', '68100', '1988-12-04', 'Avenue de Mulhouse', 'M'),
+	(4, 'Océane', 'MARTIN', '0635324547', 'martin@gmail.com', 'STRASBOURG', '67000', '1993-12-04', '54 Rue Principale', 'F'),
+	(5, 'Julie', 'ADER', '0656897845', 'ader@gmail.com', 'COLMAR', '68200', '1995-12-04', '22 Rue des Roses', 'F');
 
 -- Listage de la structure de table formationbdd. messenger_messages
 CREATE TABLE IF NOT EXISTS `messenger_messages` (
@@ -84,9 +94,22 @@ CREATE TABLE IF NOT EXISTS `module` (
   PRIMARY KEY (`id`),
   KEY `IDX_C242628BCF5E72D` (`categorie_id`),
   CONSTRAINT `FK_C242628BCF5E72D` FOREIGN KEY (`categorie_id`) REFERENCES `categorie` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table formationbdd.module : ~0 rows (environ)
+-- Listage des données de la table formationbdd.module : ~12 rows (environ)
+INSERT INTO `module` (`id`, `categorie_id`, `titre_mod`) VALUES
+	(1, 1, 'Word'),
+	(2, 1, 'Excel'),
+	(3, 1, 'Powerpoint'),
+	(4, 2, 'PHP'),
+	(5, 2, 'SQL'),
+	(6, 2, 'JavaScript'),
+	(7, 4, 'Excel'),
+	(8, 3, 'Word'),
+	(9, 3, 'Powerpoint'),
+	(10, 4, 'Word'),
+	(11, 3, 'Vente'),
+	(12, 4, 'Maths');
 
 -- Listage de la structure de table formationbdd. programmer
 CREATE TABLE IF NOT EXISTS `programmer` (
@@ -145,10 +168,16 @@ CREATE TABLE IF NOT EXISTS `stagiaire` (
   `adresse` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `cp` varchar(20) COLLATE utf8mb4_unicode_ci NOT NULL,
   `date_naissance` date NOT NULL,
+  `sexe` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table formationbdd.stagiaire : ~0 rows (environ)
+-- Listage des données de la table formationbdd.stagiaire : ~4 rows (environ)
+INSERT INTO `stagiaire` (`id`, `prenom`, `nom`, `email`, `telephone`, `ville`, `adresse`, `cp`, `date_naissance`, `sexe`) VALUES
+	(1, 'Nicolas', 'AUBERT', 'nicolas@gmail.com', '0708040501', 'STRASBOURG', '15 Rue des Champs', '67000', '2000-12-04', 'M\r\n'),
+	(2, 'Corinne', 'DIAZ', 'corine@gmail.com', '0807090504', 'STRASBOURG', '8 Rue du Chêne', '67200', '1999-12-04', 'F'),
+	(3, 'Henri', 'BLONDEL', 'henri@gmail.com', '0759587884', 'COLMAR', '31 Avenue de Starsbourg', '68000', '2003-12-04', 'M'),
+	(4, 'Aurelie', 'LESAGE', 'aurelie@gmail.com', '0654987585', 'COLMAR', '33 Avenue de Strasbourg', '68000', '1996-12-04', 'F');
 
 -- Listage de la structure de table formationbdd. user
 CREATE TABLE IF NOT EXISTS `user` (

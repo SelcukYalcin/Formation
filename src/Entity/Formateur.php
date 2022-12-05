@@ -43,6 +43,9 @@ class Formateur
     #[ORM\OneToMany(mappedBy: 'formateur', targetEntity: Session::class)]
     private Collection $gerer;
 
+    #[ORM\Column(length: 10)]
+    private ?string $sexe = null;
+
     public function __construct()
     {
         $this->gerer = new ArrayCollection();
@@ -124,6 +127,22 @@ class Formateur
 
         return $this;
     }
+    
+    public function getAdresse(): ?string
+    {
+        return $this->adresse;
+    }
+
+    public function setAdresse(string $adresse): self
+    {
+        $this->adresse = $adresse;
+
+        return $this;
+    }
+    public function getAdresseComplete() 
+    {
+        return $this->adresse." ".$this->cp." ".$this->ville;
+    }
 
     public function getDateNaissance(): ?\DateTimeInterface
     {
@@ -137,18 +156,20 @@ class Formateur
         return $this;
     }
 
-    public function getAdresse(): ?string
+
+
+    public function getSexe(): ?string
     {
-        return $this->adresse;
+        return $this->sexe;
     }
 
-    public function setAdresse(string $adresse): self
+    public function setSexe(string $sexe): self
     {
-        $this->adresse = $adresse;
+        $this->sexe = $sexe;
 
         return $this;
     }
-
+    
     /**
      * @return Collection<int, Session>
      */
@@ -178,4 +199,11 @@ class Formateur
 
         return $this;
     }
+
+    public function __toString()
+    {
+        return $this->nom . " " . $this->prenom . " ";
+    }
+
+
 }

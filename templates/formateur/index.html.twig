@@ -4,27 +4,27 @@
 
 {% block body %}
 
-<H1>FORMATEURS</H1>
+<h1>FORMATEURS</h1>
+<p><button class="addButton"><a href=" {{ path('add_formateur') }} ">Ajouter un formateur</a></button></p>     
 
-<div class="example-wrapper">
+<div class="example-wrapper"></div>        
+
     <table>
+
         <thead>
             <tr>
-                <th>FORMATEUR</th>
-                <th>MAIL</th>
-                <th>TELEPHONE</th>     
-                <th>SEXE</th>     
-                <th>VILLE</th>        
+                <th>NOM Prénom </th>
+                <th>Action</th>  
             </tr>
         </thead>
         <tbody>
             {% for formateur in formateurs %}
                 <tr>
-                    <td>{{ formateur.prenom ~' '~ formateur.nom }}</td>
-                    <td>{{ formateur.email }}</td>
-                    <td>{{ formateur.telephone }}</td>
-                    <td>{{ formateur.sexe }}</td>
-                    <td>{{ formateur.ville }}</td>
+                    <td>
+                        <a href=" {{ path('show_formateur', {'id': formateur.id}) }} "> {{ formateur }} </a></td>
+                    <td>
+                        <a href="{{ path('edit_formateur', {'id': formateur.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
+                    </td>
                 </tr> 
             {% endfor %}
         </tbody>

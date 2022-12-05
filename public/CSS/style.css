@@ -1,1 +1,34 @@
-*body
+* {
+    box-sizing: border-box;
+    margin: 0;  
+
+}
+body{
+    background-color: rgb(126, 126, 126);
+    padding: 20px;
+}
+
+/*------------------------------- NAVBAR ------------------------------------ */
+
+nav ul {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 0;
+    padding: 0; 
+    height: 80px;
+    background-color: rgb(150, 188, 236);
+    margin: 20px;
+    border: solid 1px ;
+    border-radius: 5px;
+    box-shadow: 5px 5px 10px rgba(16, 3, 77, 0);
+}
+
+nav ul li {
+    list-style: none;
+}
+
+nav ul li a {
+    text-decoration: none;
+    color: #453eb0;
+}

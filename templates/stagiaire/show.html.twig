@@ -1,0 +1,16 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Stagiaire{% endblock %}
+
+{% block body %}
+    <h1> {{ stagiaire }} </h1>
+
+    <h2>Détails :</h2>
+
+    <ul class="list-group">
+        Sexe : {{ stagiaire.sexe }} <br>
+        Date de naissance : {{ stagiaire.dateNaissance | date('d-m-Y') }} <br>
+        Téléphone : {{ stagiaire.telephone }} E-mail : {{ stagiaire.email }} <br>
+        Adresse : {{ stagiaire.adresseComplete }} <br>
+    </ul>
+{% endblock %}

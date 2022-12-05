@@ -10,14 +10,15 @@
     <table>
         <thead>
             <tr>
-                <th>INTITULE</th>     
+                <th>INTITULE</th> 
             </tr>
-            
         </thead>
-        <tbody>
+        <tbody>  
             {% for session in sessions %}
-                <a href="{{ path('show_session', {'id': session.id}) }}">{{ session }}  </a><br>
-            {% endfor %}
+                <tr>
+                    <td><a href=" {{ path('show_session', {'id': session.id}) }} "> {{ session }} </a></td>
+                </tr>
+            {% endfor %}    
         </tbody>
     </table>
 </div>

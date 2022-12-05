@@ -3,7 +3,9 @@
 namespace App\Controller;
 
 use App\Entity\Stagiaire;
+use App\Form\StagiaireType;
 use Doctrine\Persistence\ManagerRegistry;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -17,5 +19,50 @@ class StagiaireController extends AbstractController
         return $this->render('stagiaire/index.html.twig', [
             'stagiaires' => $stagiaires,
                 ]);
+    }
+
+    //<---------- FONCTION AJOUTER ET EDITER UN STAGIAIRE ---------->
+     /**
+     * @Route("/stagiaire/add", name="add_stagiaire")
+     * @Route("/stagiaire/{id}/edit", name="edit_stagiaire")
+     */
+    public function add(ManagerRegistry $doctrine, Stagiaire $stagiaire = null, Request $request): Response 
+    {
+        if(!$stagiaire) 
+        {
+            $stagiaire = new Stagiaire();
+        }
+        $form = $this->createForm(StagiaireType::class, $stagiaire);
+        $form->handleRequest($request);
+        //<---------- SI LE FORMULAIRE EST SOUMIS ET VALIDE ---------->
+        if($form->isSubmitted() && $form->isValid()) 
+        {
+            //  RECUPERE ET STOCKE LES DONNEES DU FORMULAIRE
+            $stagiaire = $form->getData();
+            $entityManager = $doctrine->getManager();
+            //<---------- PREPARE ---------->
+            $entityManager->persist($stagiaire);
+            //<---------- EXECUTE ---------->
+            $entityManager->flush();
+            return $this->redirectToRoute('app_stagiaire');
+        }
+
+        //<---------- RENVOI L'AFFICHAGE DU FORMULAIRE ---------->
+        return $this->render('stagiaire/add.html.twig', 
+        [
+            //<---------- CREATION DE LA VUE DU FORMULAIRE ---------->
+            'formAddStagiaire' =>$form->createView(),
+            //<---------- ID POUR EDITER LE STAGIAIRE ---------->
+            'edit' => $stagiaire->getId()
+        ]);
+    }
+
+    //<---------- FONCTION AFFICHER STAGIAIRE ---------->
+    #[Route('/stagiaire/{id}', name: 'show_stagiaire')]
+    public function show(Stagiaire $stagiaire): Response
+    {       
+        return $this->render('stagiaire/show.html.twig', [
+           'stagiaire' => $stagiaire,
+        ]);
     }
 }

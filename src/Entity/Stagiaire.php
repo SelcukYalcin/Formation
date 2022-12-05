@@ -43,6 +43,9 @@ class Stagiaire
     #[ORM\ManyToMany(targetEntity: Session::class, mappedBy: 'inscrit')]
     private Collection $sessions;
 
+    #[ORM\Column(length: 10)]
+    private ?string $sexe = null;
+
     public function __construct()
     {
         $this->sessions = new ArrayCollection();
@@ -137,6 +140,11 @@ class Stagiaire
         return $this;
     }
 
+    public function getAdresseComplete() 
+    {
+        return $this->adresse." ".$this->cp." ".$this->ville;
+    }
+    
     public function getDateNaissance(): ?\DateTimeInterface
     {
         return $this->dateNaissance;
@@ -149,6 +157,18 @@ class Stagiaire
         return $this;
     }
 
+    public function getSexe(): ?string
+    {
+        return $this->sexe;
+    }
+
+    public function setSexe(string $sexe): self
+    {
+        $this->sexe = $sexe;
+
+        return $this;
+    }
+    
     /**
      * @return Collection<int, Session>
      */
@@ -174,5 +194,10 @@ class Stagiaire
         }
 
         return $this;
+    }
+
+    public function __toString()
+    {
+        return $this->nom . " " . $this->prenom . " ";
     }
 }
