@@ -3,8 +3,14 @@
 {% block title %}Session{% endblock %}
 
 {% block body %}
-
-
     <h1> {{ session }} </h1>
 
+    <p><a  href="{{ path('edit_session', {'id': session.id}) }}"><i class="bi bi-pencil-square"></i></a></p>   
+    <div class="">
+            Formateur référent : {{ session.formateur }}<br>
+            Date de début : {{ session.dateDebut | date('d-m-Y') }}<br>
+            Date de fin : {{ session.dateFin | date('d-m-Y') }}<br>
+            Nombre de places : {{ session.nbPlace }}<br>
+            Nombre de modules : {{ session.programmers | length }}      
+    </div>
 {% endblock %}

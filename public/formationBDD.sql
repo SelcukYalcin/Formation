@@ -24,14 +24,15 @@ CREATE TABLE IF NOT EXISTS `categorie` (
   `id` int NOT NULL AUTO_INCREMENT,
   `titre_cat` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table formationbdd.categorie : ~4 rows (environ)
+-- Listage des données de la table formationbdd.categorie : ~5 rows (environ)
 INSERT INTO `categorie` (`id`, `titre_cat`) VALUES
 	(1, 'BUREAUTIQUE'),
 	(2, 'DEW WEB'),
 	(3, 'COMMERCE'),
-	(4, 'COMPTABILITE');
+	(4, 'COMPTABILITE'),
+	(5, 'test');
 
 -- Listage de la structure de table formationbdd. doctrine_migration_versions
 CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
@@ -41,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `doctrine_migration_versions` (
   PRIMARY KEY (`version`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb3 COLLATE=utf8mb3_unicode_ci;
 
--- Listage des données de la table formationbdd.doctrine_migration_versions : ~2 rows (environ)
+-- Listage des données de la table formationbdd.doctrine_migration_versions : ~0 rows (environ)
 INSERT INTO `doctrine_migration_versions` (`version`, `executed_at`, `execution_time`) VALUES
 	('DoctrineMigrations\\Version20221202200705', '2022-12-02 20:09:52', 475),
 	('DoctrineMigrations\\Version20221204145405', '2022-12-04 14:54:16', 282);
@@ -59,15 +60,16 @@ CREATE TABLE IF NOT EXISTS `formateur` (
   `adresse` varchar(50) COLLATE utf8mb4_unicode_ci NOT NULL,
   `sexe` varchar(10) COLLATE utf8mb4_unicode_ci NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table formationbdd.formateur : ~5 rows (environ)
+-- Listage des données de la table formationbdd.formateur : ~6 rows (environ)
 INSERT INTO `formateur` (`id`, `prenom`, `nom`, `telephone`, `email`, `ville`, `cp`, `date_naissance`, `adresse`, `sexe`) VALUES
 	(1, 'Mickael', 'MURMANN', '07087896548', 'murmann@gmail.com', 'STRASBOURG', '67100', '1986-11-14', 'Rue des Peupliers', 'M'),
 	(2, 'Stephane', 'SMAIL', '0708742554', 'smail@gmail.com', 'MULHOUSE', '68000', '1985-12-02', 'Rue des Champs', 'M'),
 	(3, 'Philippe ', 'BOURDON', '0696857448', 'bourdon@gmail.com', 'COLMAR', '68100', '1988-12-04', 'Avenue de Mulhouse', 'M'),
 	(4, 'Océane', 'MARTIN', '0635324547', 'martin@gmail.com', 'STRASBOURG', '67000', '1993-12-04', '54 Rue Principale', 'F'),
-	(5, 'Julie', 'ADER', '0656897845', 'ader@gmail.com', 'COLMAR', '68200', '1995-12-04', '22 Rue des Roses', 'F');
+	(5, 'Julie', 'ADER', '0656897845', 'ader@gmail.com', 'COLMAR', '68200', '1995-12-04', '22 Rue des Roses', 'F'),
+	(6, 'aa', 'sss', '222', 'assas@kkk.com', 'kjjhjh', '25555', '1999-12-27', 'nh', 'M');
 
 -- Listage de la structure de table formationbdd. messenger_messages
 CREATE TABLE IF NOT EXISTS `messenger_messages` (
@@ -94,9 +96,9 @@ CREATE TABLE IF NOT EXISTS `module` (
   PRIMARY KEY (`id`),
   KEY `IDX_C242628BCF5E72D` (`categorie_id`),
   CONSTRAINT `FK_C242628BCF5E72D` FOREIGN KEY (`categorie_id`) REFERENCES `categorie` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=13 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table formationbdd.module : ~12 rows (environ)
+-- Listage des données de la table formationbdd.module : ~11 rows (environ)
 INSERT INTO `module` (`id`, `categorie_id`, `titre_mod`) VALUES
 	(1, 1, 'Word'),
 	(2, 1, 'Excel'),
@@ -104,12 +106,11 @@ INSERT INTO `module` (`id`, `categorie_id`, `titre_mod`) VALUES
 	(4, 2, 'PHP'),
 	(5, 2, 'SQL'),
 	(6, 2, 'JavaScript'),
-	(7, 4, 'Excel'),
-	(8, 3, 'Word'),
-	(9, 3, 'Powerpoint'),
-	(10, 4, 'Word'),
 	(11, 3, 'Vente'),
-	(12, 4, 'Maths');
+	(12, 4, 'Maths'),
+	(13, 5, 'aa'),
+	(14, 5, 'aaaa'),
+	(15, 3, 'dfff');
 
 -- Listage de la structure de table formationbdd. programmer
 CREATE TABLE IF NOT EXISTS `programmer` (
@@ -122,9 +123,19 @@ CREATE TABLE IF NOT EXISTS `programmer` (
   KEY `IDX_4136CCA9693C485D` (`prog_mod_id`),
   CONSTRAINT `FK_4136CCA9693C485D` FOREIGN KEY (`prog_mod_id`) REFERENCES `module` (`id`),
   CONSTRAINT `FK_4136CCA9D79E5C31` FOREIGN KEY (`prog_ses_id`) REFERENCES `session` (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=10 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table formationbdd.programmer : ~0 rows (environ)
+-- Listage des données de la table formationbdd.programmer : ~9 rows (environ)
+INSERT INTO `programmer` (`id`, `prog_ses_id`, `prog_mod_id`, `duree`) VALUES
+	(1, 1, 5, 10),
+	(2, 1, 4, 15),
+	(3, 1, 6, 20),
+	(4, 2, 6, 12),
+	(5, 2, 4, 14),
+	(6, 2, 5, 15),
+	(7, 3, 11, 20),
+	(8, 3, 2, 8),
+	(9, 3, 12, 22);
 
 -- Listage de la structure de table formationbdd. session
 CREATE TABLE IF NOT EXISTS `session` (
@@ -137,12 +148,13 @@ CREATE TABLE IF NOT EXISTS `session` (
   PRIMARY KEY (`id`),
   KEY `IDX_D044D5D4155D8F51` (`formateur_id`),
   CONSTRAINT `FK_D044D5D4155D8F51` FOREIGN KEY (`formateur_id`) REFERENCES `formateur` (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Listage des données de la table formationbdd.session : ~2 rows (environ)
+-- Listage des données de la table formationbdd.session : ~3 rows (environ)
 INSERT INTO `session` (`id`, `formateur_id`, `intitule`, `date_debut`, `date_fin`, `nb_place`) VALUES
 	(1, 1, 'Plateau Strasbourg', '2022-12-02', '2022-12-05', 15),
-	(2, 2, 'Plateau Mulhouse', '2022-12-02', '2023-03-02', 12);
+	(2, 2, 'Plateau Mulhouse', '2022-12-02', '2023-03-02', 12),
+	(3, 5, 'Plateau Colmar', '2023-01-06', '2023-04-06', 10);
 
 -- Listage de la structure de table formationbdd. session_stagiaire
 CREATE TABLE IF NOT EXISTS `session_stagiaire` (
