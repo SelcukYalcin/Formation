@@ -11,16 +11,16 @@
     <table>
         <thead>
             <tr>
-                <th><h3>INTITULE</h3></th> 
+                <th><h3>Intitulé</h3></th> 
             </tr>
         </thead>
         <tbody>  
             {% for session in sessions %}
                 <tr>
                     <td>
-                        <a href=" {{ path('show_session', {'id': session.id}) }} "> {{ session }} </a>
+                        - <a href=" {{ path('show_session', {'id': session.id}) }} "> {{ session }} </a>
                     </td>
-                    <td> {{ session.dateDebut | date('d-m-Y') }} </td>
+                    <td> {{ session.dateDebut | date('d-m-Y') }} /</td>
                     <td> {{ session.dateFin | date('d-m-Y') }} </td>
                     <td>
                         <a href="{{ path('edit_session', {'id': session.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a> 

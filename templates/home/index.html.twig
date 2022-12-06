@@ -7,7 +7,7 @@
 <h1>ACCUEIL</h1>
 
 <div class="sess-home">
-    <h2>SESSIONS PASSEES</h2>
+    <h2>Sessions passées</h2>
             
     {% if pastSessions | length == 0 %}
        
@@ -17,16 +17,16 @@
         <table>
             <thead>
                 <tr>
-                    <th>INTITULE</th>
-                    <th>REFERENT</th>
-                    <th>DATES</th>
-                    <th>NOMBRE DE PLACES</th>       
+                    <th>Intitulé</th>
+                    <th>Formateur référent</th>
+                    <th>Période</th>
+                    <th>Nombre de places</th>       
                 </tr>
             </thead>
             <tbody>
                 {% for session in pastSessions %}
                     <tr>
-                        <td><a href="{{ path('show_session', {'id': session.id}) }}">{{ session.intitule }}</a></td>
+                        <td>- <a href="{{ path('show_session', {'id': session.id}) }}">{{ session.intitule }}</a></td>
                         <td><a href="{{ path('show_formateur', {'id': session.formateur.id}) }}">{{ session.formateur }}</a></td>
                         <td>{{ session.dateDebut | date("m/d/Y") ~' au '~ session.dateFin | date("m/d/Y")  }}</td>
                         <td>{{ session.nbPlace }}</td>
@@ -38,7 +38,7 @@
 </div>
 
 <div class="sess-home">
-    <h2>SESSIONS EN COURS</h2>
+    <h2>Sessions en cours</h2>
 
     {% if currentSessions | length == 0 %}
         
@@ -48,16 +48,16 @@
         <table>
             <thead>
                 <tr>
-                    <th>INTITULE</th>
-                    <th>REFERENT</th>
-                    <th>DATES</th>
-                    <th>NOMBRE DE PLACES</th>       
+                    <th>Intitulé</th>
+                    <th>Formateur référent</th>
+                    <th>Période</th>
+                    <th>Nombre de places</th>      
                 </tr>
             </thead>
             <tbody>
                 {% for session in currentSessions %}
                     <tr>
-                        <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.intitule }}</a></td>
+                        <td>- <a href="{{ path('show_session', {'id': session.id})}}">{{ session.intitule }}</a></td>
                         <td><a href="{{ path('show_formateur', {'id': session.formateur.id})}}">{{ session.formateur }}</a></td>
                         <td>{{ session.dateDebut | date("m/d/Y") ~' au '~ session.dateFin | date("m/d/Y")  }}</td>
                         <td>{{ session.nbPlace }}</td>
@@ -69,7 +69,7 @@
 </div>
 
 <div class="sess-home">
-    <h2>SESSIONS A VENIR</h2>
+    <h2>Sessions à venir</h2>
             
     {% if upcomingSessions | length == 0 %}
         
@@ -79,16 +79,16 @@
         <table>
             <thead>
                 <tr>
-                    <th>INTITULE</th>
-                    <th>REFERENT</th>
-                    <th>DATES</th>
-                    <th>NOMBRE DE PLACES</th>       
+                    <th>Intitulé</th>
+                    <th>Formateur référent</th>
+                    <th>Période</th>
+                    <th>Nombre de places</th>   
                 </tr>
             </thead>
             <tbody>
                 {% for session in upcomingSessions %}
                     <tr>
-                        <td><a href="{{ path('show_session', {'id': session.id})}}">{{ session.intitule }}</a></td>
+                        <td>- <a href="{{ path('show_session', {'id': session.id})}}">{{ session.intitule }}</a></td>
                         <td><a href="{{ path('show_formateur', {'id': session.formateur.id})}}">{{ session.formateur }}</a></td>
                         <td>{{ session.dateDebut|date("m/d/Y") ~' au '~ session.dateFin|date("m/d/Y")  }}</td>
                         <td>{{ session.nbPlace }}</td>

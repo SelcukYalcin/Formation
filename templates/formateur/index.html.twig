@@ -7,13 +7,13 @@
 <h1>FORMATEURS</h1>
 <p><button class="addButton"><a href=" {{ path('add_formateur') }} ">Ajouter un formateur</a></button></p>     
 
-<div class="example-wrapper"></div>        
+<div class="formateurs"></div>        
 
     <table>
 
         <thead>
             <tr>
-                <th>NOM Prénom </th>
+                <th> Nom Prénom</th>
                 <th>Action</th>  
             </tr>
         </thead>
@@ -21,7 +21,7 @@
             {% for formateur in formateurs %}
                 <tr>
                     <td>
-                        <a href=" {{ path('show_formateur', {'id': formateur.id}) }} "> {{ formateur }} </a></td>
+                        -<a href=" {{ path('show_formateur', {'id': formateur.id}) }} "> {{ formateur }} </a></td>
                     <td>
                         <a href="{{ path('edit_formateur', {'id': formateur.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                     </td>

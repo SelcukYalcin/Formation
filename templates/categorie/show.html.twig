@@ -14,14 +14,14 @@
     <table>
         <thead>
             <tr>
-                <th>MODULE</th>
+                <th>Modules</th>
             </tr>
         </thead>
         <tbody>
             {% for associer in categorie.associer %}
                 <tr>
                     <td>
-                        {{ associer.titreMod }}
+                        - {{ associer.titreMod }}
                     </td>
                     <td>
                     <a href="{{ path('edit_module', {'id': associer.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a> 

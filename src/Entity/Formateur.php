@@ -202,7 +202,7 @@ class Formateur
 
     public function __toString()
     {
-        return $this->prenom . " " . $this->nom . " ";
+        return $this->nom . " " . $this->prenom . " ";
     }
 
     public function getIdentite()
