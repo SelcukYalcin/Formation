@@ -2,17 +2,27 @@
 
 namespace App\Controller;
 
-use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
+use App\Repository\SessionRepository;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class HomeController extends AbstractController
 {
-    #[Route('/home', name: 'app_home')]
-    public function index(): Response
+    /**
+     * @Route("/", name="app_home")
+     */
+    public function index(SessionRepository $sr): Response
     {
-        return $this->render('home/index.html.twig', [
-            'controller_name' => 'HomeController',
+        $pastSessions = $sr->displayPastSessions();
+        $currentSessions = $sr->displayCurrentSessions();
+        $upcomingSessions = $sr->displayUpcomingSessions();
+
+        return $this->render('home/index.html.twig', 
+        [
+            'pastSessions' => $pastSessions,
+            'currentSessions' => $currentSessions,
+            'upcomingSessions' => $upcomingSessions
         ]);
     }
 }

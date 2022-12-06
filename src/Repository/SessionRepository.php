@@ -38,6 +38,40 @@ class SessionRepository extends ServiceEntityRepository
             $this->getEntityManager()->flush();
         }
     }
+    // <---------- AFFICHER LES SESSIONS PASSEES ---------->
+    public function displayPastSessions() 
+    {
+        $now = new \DateTime();
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.dateFin < :val')
+            ->setParameter('val', $now)
+            ->orderBy('s.dateDebut', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    // <---------- AFFICHER LES SESSIONS EN COURS ---------->
+    public function displayCurrentSessions() 
+    {
+        $now = new \DateTime();
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.dateDebut < :val')
+            ->andWhere('s.dateFin > :val')
+            ->setParameter('val', $now)
+            ->orderBy('s.dateDebut', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
+    // <---------- AFFICHER LES SESSIONS A VENIR ---------->
+    public function displayUpcomingSessions() 
+    {
+        $now = new \DateTime();
+        return $this->createQueryBuilder('s')
+            ->andWhere('s.dateDebut > :val')
+            ->setParameter('val', $now)
+            ->orderBy('s.dateDebut', 'ASC')
+            ->getQuery()
+            ->getResult();
+    }
 
 //    /**
 //     * @return Session[] Returns an array of Session objects

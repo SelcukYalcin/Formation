@@ -7,6 +7,36 @@
 <h1>ACCUEIL</h1>
 
 <div class="example-wrapper">
+    <h2>SESSIONS PASSEES</h2>
+            
+    {% if pastSessions | length == 0 %}
+       
+    <p class="noEntry">Pas de sessions terminées</p>
+
+    {% else %}
+        {# utilisation d'un for pour afficher un tableau qu'on récupère #}
+        {# sessions -> éléments du controller qu'on récupère #}
+        <table>
+            <thead>
+                <tr>
+                    <th>INTITULE</th>
+                    <th>REFERENT</th>
+                    <th>DATES</th>
+                    <th>NOMBRE DE PLACES</th>       
+                </tr>
+            </thead>
+            <tbody>
+                {% for session in pastSessions %}
+                    <tr>
+                        <td><a href="{{ path('show_session', {'id': session.id}) }}">{{ session.intitule }}</a></td>
+                        <td><a href="{{ path('show_formateur', {'id': session.formateur.id}) }}">{{ session.formateur }}</a></td>
+                        <td>{{ session.dateDebut|date("m/d/Y") ~' au '~ session.dateFin|date("m/d/Y")  }}</td>
+                        <td>{{ session.nbPlace }}</td>
+                    </tr> 
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
   
 
 </div>

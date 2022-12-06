@@ -19,8 +19,8 @@ class SessionType extends AbstractType
     {
         $builder
             ->add('intitule', TextType::class, ['label' => 'Intitulé :'])
-            ->add('dateDebut', DateType::class, ['label' => 'Date de Début :'])
-            ->add('dateFin', DateType::class, ['label' => 'Date de Fin :'])
+            ->add('dateDebut', DateType::class, ['label' => 'Date de Début :','widget' => 'single_text'])
+            ->add('dateFin', DateType::class, ['label' => 'Date de Fin :','widget' => 'single_text'])
             ->add('nbPlace', NumberType::class, ['label' => 'Nombre de Place(s) :'])
             ->add('formateur', EntityType::class, ['class' => Formateur::class, 'choice_label' =>'identite'])
             ->add('submit', SubmitType::class, ['label' => 'Valider'])
