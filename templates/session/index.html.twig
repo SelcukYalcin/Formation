@@ -5,21 +5,29 @@
 {% block body %}
 
 <h1>SESSIONS</h1>
+<h3><button class="addButton"><a href=" {{ path('add_session') }} ">Ajouter une session</a></button></h3>
 
 <div class="example-wrapper">
     <table>
         <thead>
             <tr>
-                <th>INTITULE</th> 
+                <th><h3>INTITULE</h3></th> 
             </tr>
         </thead>
         <tbody>  
             {% for session in sessions %}
                 <tr>
-                    <td><a href=" {{ path('show_session', {'id': session.id}) }} "> {{ session }} </a></td>
+                    <td>
+                        <a href=" {{ path('show_session', {'id': session.id}) }} "> {{ session }} </a>
+                    </td>
+                    <td>
+                        <a href="{{ path('edit_session', {'id': session.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a> 
+                    </td>
                 </tr>
             {% endfor %}    
         </tbody>
     </table>
 </div>
+
+
 {% endblock %}
