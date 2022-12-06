@@ -3,6 +3,10 @@
 {% block title %}Formulaire Formateur{% endblock %}
 
 {% block body %}
-    <h2>Editer un Formateur</h2>
+{% if edit %}
+<h1>Editer un Formateur</h1>
+{% else %}
+<h1>Ajouter un Formateur</h1>
+{% endif %} 
     {{ form(formAddFormateur) }}
 {% endblock %}

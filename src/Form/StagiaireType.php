@@ -16,15 +16,15 @@ class StagiaireType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder
-            ->add('prenom', TextType::class)
-            ->add('nom', TextType::class)
-            ->add('dateNaissance', DateType::class, ['label' => 'Date de naissance','widget' => 'single_text'])
-            ->add('email', EmailType::class, ['label' => 'Adresse e-mail'])
-            ->add('telephone', TextType::class, ['label' => 'Téléphone']) 
-            ->add('adresse', TextType::class)
-            ->add('cp', TextType::class)
-            ->add('ville', TextType::class)
-            ->add('sexe', TextType::class)
+            ->add('prenom', TextType::class, ['label' => 'Prénom :'])
+            ->add('nom', TextType::class, ['label' => 'Nom :'])
+            ->add('dateNaissance', DateType::class, ['label' => 'Date de Naissance :','widget' => 'single_text'])
+            ->add('email', EmailType::class, ['label' => 'Adresse E-mail :'])
+            ->add('telephone', TextType::class, ['label' => 'Téléphone :']) 
+            ->add('adresse', TextType::class, ['label' => 'Adresse :'])
+            ->add('cp', TextType::class, ['label' => 'Code Postal :'])
+            ->add('ville', TextType::class, ['label' => 'Ville :'])
+            ->add('sexe', TextType::class, ['label' => 'Sexe :'])
             ->add('submit', SubmitType::class, ['label' => 'Valider'])
         ;
     }

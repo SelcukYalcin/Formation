@@ -1,0 +1,12 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Formulaire Module{% endblock %}
+
+{% block body %}
+{% if edit %}
+<h1>Editer un Module</h1>
+{% else %}
+<h1>Ajouter un Module</h1>
+{% endif %} 
+    {{ form(formAddModule) }}
+{% endblock %}

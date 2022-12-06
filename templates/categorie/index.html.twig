@@ -5,7 +5,7 @@
 {% block body %}
 
 <h1>CATEGORIES</h1>
-
+<p><button class="addButton"><a href=" {{ path('add_categorie') }} ">Ajouter une Catégorie</a></button></p>     
 <div class="example-wrapper">
     <table>
         <thead>
@@ -15,9 +15,13 @@
         </thead>
         <tbody>
             {% for categorie in categories %}
-                <tr>
-                    <td>{{ categorie.titreCat }}</td>
-                </tr> 
+            <tr>
+                <td>
+                    <a href="{{ path('show_categorie', {'id': categorie.id}) }}">{{ categorie.titreCat }}</a></td>
+                <td>
+                    <a href="{{ path('edit_categorie', {'id': categorie.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a> 
+                </td>
+            </tr> 
             {% endfor %}
         </tbody>
     </table>

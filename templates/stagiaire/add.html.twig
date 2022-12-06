@@ -3,6 +3,10 @@
 {% block title %}Formulaire Stagiaire{% endblock %}
 
 {% block body %}
-    <h2>Editer un Stagiaire</h2>
+{% if edit %}
+<h1>Editer un Stagiaire</h1>
+{% else %}
+<h1>Ajouter un Stagiaire</h1>
+{% endif %} 
     {{ form(formAddStagiaire) }}
 {% endblock %}

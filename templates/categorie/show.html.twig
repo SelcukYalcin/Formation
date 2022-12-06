@@ -1,0 +1,34 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Catégorie{% endblock %}
+
+{% block body %}
+
+    <h1>Module(s) de la Catégorie {{ categorie.titreCat }}</h1>
+    <p><button class="addButton"><a href=" {{ path('add_module') }} ">Ajouter un Module</a></button></p>
+
+    {% if categorie.associer | length == 0 %}
+        <p>test</p>
+        
+    {% else %}
+    <table>
+        <thead>
+            <tr>
+                <th>MODULE</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for associer in categorie.associer %}
+                <tr>
+                    <td>
+                        {{ associer.titreMod }}
+                    </td>
+                    <td>
+                    <a href="{{ path('edit_module', {'id': associer.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a> 
+                    </td>
+                </tr> 
+            {% endfor %}
+        </tbody>
+    </table>
+    {% endif %}
+{% endblock %} 
