@@ -7,10 +7,18 @@
 
     <h2>Détails :</h2>
 
-    <ul class="list-group">
+    <ul class="formateur-detail">
         - Sexe : {{ formateur.sexe }} <br>
         - Date de naissance : {{ formateur.dateNaissance | date('d-m-Y') }} <br>
         - Téléphone : {{ formateur.telephone }} E-mail : {{ formateur.email }} <br>
         - Adresse : {{ formateur.adresseComplete }} <br>
     </ul>
+
+    <h2>Session(s) :</h2>
+    {% for gerer in formateur.gerer %}
+        <td>
+            - {{ gerer.intitule }}
+        </td>
+        
+    {% endfor %}
 {% endblock %}

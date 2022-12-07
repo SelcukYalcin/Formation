@@ -13,4 +13,11 @@
         - Téléphone : {{ stagiaire.telephone }} E-mail : {{ stagiaire.email }} <br>
         - Adresse : {{ stagiaire.adresseComplete }} <br>
     </ul>
+
+    <h2>Session(s) :</h2>
+    {% for session in stagiaire.sessions %}
+        <td>
+            - {{ session.intitule }}
+        </td>        
+    {% endfor %}
 {% endblock %}
