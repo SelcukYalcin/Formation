@@ -5,7 +5,7 @@
 {% block body %}
 
 <h1>MODULES</h1>
-
+<p><button class="addButton"><a href=" {{ path('add_module') }} ">Ajouter un Module</a></button></p>     
 <div class="example-wrapper">
 
     <table>
@@ -18,6 +18,9 @@
             {% for module in modules %}
                 <tr>
                     <td>- {{ module.titreMod }}</td>
+                    <td><a href="{{ path('edit_module', {'id': module.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a></td>
+                    <td><a href="{{ path('delModule_module', {'id': module.id}) }} "><i class="fa-solid fa-trash"></i></a></td>
+
                 </tr> 
             {% endfor %}
         </tbody>

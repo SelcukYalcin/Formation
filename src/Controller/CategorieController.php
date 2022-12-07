@@ -70,6 +70,17 @@ class CategorieController extends AbstractController
         return $this->redirectToRoute('app_categorie');
     }
 
+    #[Route("/categorie/{id}/delCategorie", name:"delCategorie_categorie")]
+    //<---------- FONCTION SUPPRIMER UN CATEGORIE ---------->
+    public function delCategorie(ManagerRegistry $doctrine, Categorie $categorie)
+    {
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($categorie);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_categorie');
+    }
+
     //<---------- FONCTION AFFICHER CATEGORIE ---------->
     #[Route('/categorie/{id}', name: 'show_categorie')]
     public function show(Categorie $categorie): Response

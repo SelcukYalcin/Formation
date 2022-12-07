@@ -32,7 +32,6 @@ class SessionController extends AbstractController
         if (!$session) {
             $session = new Session();
         }
-
         $form = $this->createForm(SessionType::class, $session);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) {
@@ -56,9 +55,19 @@ class SessionController extends AbstractController
         );
     }
 
+    #[Route("/session/{id}/delSession", name:"delSession_session")]
+    //<---------- FONCTION SUPPRIMER UN session ---------->
+    public function delsession(ManagerRegistry $doctrine, Session $session)
+    {
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($session);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_session');
+    }
+
     //<---------- FONCTION AFFICHER SESSION ---------->
     #[Route("/session/{id}", name: "show_session")]
-
     public function show(Session $session, SessionRepository $sr): Response
     {
         $nonInscrits = $sr->findNonInscrits($session->getId());

@@ -57,8 +57,17 @@ class StagiaireController extends AbstractController
         ]);
     }
 
-    public function delStagiaire()
+    #[Route("/stagiaire/{id}/delStagiaire", name:"delStagiaire_stagiaire")]
 
+    //<---------- FONCTION SUPPRIMER UN STAGIAIRE ---------->
+    public function delStagiaire(ManagerRegistry $doctrine, Stagiaire $stagiaire)
+    {
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($stagiaire);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_stagiaire');
+    }
     //<---------- FONCTION AFFICHER STAGIAIRE ---------->
     #[Route('/stagiaire/{id}', name: 'show_stagiaire')]
     public function show(Stagiaire $stagiaire): Response

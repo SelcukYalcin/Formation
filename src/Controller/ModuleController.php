@@ -22,10 +22,10 @@ class ModuleController extends AbstractController
     }
 
 
-        /**
-     * @Route("/module/add", name="add_module")
-     * @Route("/module/{id}/edit", name="edit_module")
-     */
+    
+    #[Route("/module/add", name:"add_module")]
+    #[Route("/module/{id}/edit", name:"edit_module")]
+    
     public function add(ManagerRegistry $doctrine, Module $module = null, Request $request): Response
     {
         if(!$module) {
@@ -54,5 +54,16 @@ class ModuleController extends AbstractController
             //<---------- ID POUR EDITER LA MODULE ---------->
             'edit' => $module->getId()
         ]);
+    }
+
+    #[Route("/module/{id}/delModule", name:"delModule_module")]
+    //<---------- FONCTION SUPPRIMER UN MODULE ---------->
+    public function delModule(ManagerRegistry $doctrine, Module $module)
+    {
+        $entityManager = $doctrine->getManager();
+        $entityManager->remove($module);
+        $entityManager->flush();
+
+        return $this->redirectToRoute('app_module');
     }
 }
