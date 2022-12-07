@@ -57,6 +57,8 @@ class StagiaireController extends AbstractController
         ]);
     }
 
+    public function delStagiaire()
+
     //<---------- FONCTION AFFICHER STAGIAIRE ---------->
     #[Route('/stagiaire/{id}', name: 'show_stagiaire')]
     public function show(Stagiaire $stagiaire): Response
