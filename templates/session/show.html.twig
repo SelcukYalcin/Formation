@@ -33,7 +33,12 @@
         {% else %}
         {% for stagiaire in session.inscrit %}
         <tr>
-            <td>-<a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}"> {{ stagiaire }}<br></a></td>
+            <td>
+                -<a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}"> {{ stagiaire }}</a>
+            </td>
+            <td>        
+                <a href="{{ path('remove_stagiaire_session', {'idSt': stagiaire.id, 'idSe':session.id}) }}"><i class="fa-solid fa-user-minus"></i><br></a>
+            </td> 
         </tr>
         {% endfor %}
         {% endif %}
@@ -47,7 +52,7 @@
                 -<a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}"> {{ stagiaire }} </a>
             </td>
             <td>        
-                <a href="{{ path('add_stagiaire_session', {'idSt': stagiaire.id, 'idSe':session.id}) }}">  <i class="fa-solid fa-user-plus"></i><br></a>
+                <a href="{{ path('add_stagiaire_session', {'idSt': stagiaire.id, 'idSe':session.id}) }}"><i class="fa-solid fa-user-plus"></i><br></a>
             </td>            
         {% endfor %}
     </div>
