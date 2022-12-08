@@ -20,8 +20,8 @@
                     <td>
                         - <a href=" {{ path('show_session', {'id': session.id}) }} "> {{ session }} </a>
                     </td>
-                    <td> {{ session.dateDebut | date('d-m-Y') }} /</td>
-                    <td> {{ session.dateFin | date('d-m-Y') }} </td>
+                    <td> <strong>{{ session.dateDebut | date('d-m-Y') }}</strong> /</td>
+                    <td> <strong>{{ session.dateFin | date('d-m-Y') }}</strong> </td>
                     <td>
                         <a href="{{ path('edit_session', {'id': session.id}) }}"><i class="fa-solid fa-pen-to-square"></i></a>
                         <a href="{{ path('delSession_session', {'id': session.id}) }} "><i class="fa-solid fa-trash"></i></a> 

@@ -2,9 +2,10 @@
 
 namespace App\Repository;
 
+use DateTime;
 use App\Entity\Session;
-use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Persistence\ManagerRegistry;
+use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 
 /**
  * @extends ServiceEntityRepository<Session>
@@ -41,7 +42,7 @@ class SessionRepository extends ServiceEntityRepository
     // <---------- AFFICHER LES SESSIONS PASSEES ---------->
     public function displayPastSessions() 
     {
-        $now = new \DateTime();
+        $now = new DateTime();
         return $this->createQueryBuilder('s')
             ->andWhere('s.dateFin < :val')
             ->setParameter('val', $now)
@@ -76,22 +77,44 @@ class SessionRepository extends ServiceEntityRepository
     public function findNonInscrits($session_id)
     {
         $em = $this->getEntityManager();
-        $sub =$em->createQueryBuilder();
+        $nonInscrit =$em->createQueryBuilder();
 
-        $qb = $sub;
+        $qb = $nonInscrit;
         $qb->select('s')
             ->from('App\Entity\Stagiaire','s')
             ->leftJoin('s.sessions', 'se')
             ->where('se.id = :id');
 
-        $sub = $em->createQueryBuilder();
-        $sub->select('st')
+        $nonInscrit = $em->createQueryBuilder();
+        $nonInscrit->select('st')
             ->from('App\Entity\Stagiaire','st')
-            ->where($sub->expr()->notIn('st.id', $qb->getDQL()))
+            ->where($nonInscrit->expr()->notIn('st.id', $qb->getDQL()))
             ->setParameter('id', $session_id)
             ->orderBy('st.nom');
 
-        $query = $sub->getQuery();
+        $query = $nonInscrit->getQuery();
+        return $query->getResult();
+    }
+
+    public function findNonProgrammers($session_id)
+    {
+        $em = $this->getEntityManager();
+        $nonProgramme =$em->createQueryBuilder();
+
+        $qb = $nonProgramme;
+        $qb->select('m')
+            ->from('App\Entity\Module','m')
+            ->leftJoin('m.programmers', 'pr')
+            ->where('pr.progSes = :id');
+
+        $nonProgramme = $em->createQueryBuilder();
+        $nonProgramme->select('mod')
+            ->from('App\Entity\Module','mod')
+            ->where($nonProgramme->expr()->notIn('mod.id', $qb->getDQL()))
+            ->setParameter('id', $session_id)
+            // ->orderBy('mod.titreMod');
+;
+        $query = $nonProgramme->getQuery();
         return $query->getResult();
     }
 
