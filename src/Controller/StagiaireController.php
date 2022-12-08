@@ -21,11 +21,9 @@ class StagiaireController extends AbstractController
                 ]);
     }
 
-    //<---------- FONCTION AJOUTER ET EDITER UN STAGIAIRE ---------->
-     /**
-     * @Route("/stagiaire/add", name="add_stagiaire")
-     * @Route("/stagiaire/{id}/edit", name="edit_stagiaire")
-     */
+    //<---------- FONCTION AJOUTER ET EDITER UN STAGIAIRE ---------->     
+    #[Route("/stagiaire/add", name:"add_stagiaire")]
+    #[Route("/stagiaire/{id}/edit", name:"edit_stagiaire")]
     public function add(ManagerRegistry $doctrine, Stagiaire $stagiaire = null, Request $request): Response 
     {
         if(!$stagiaire) 
@@ -46,7 +44,6 @@ class StagiaireController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute('app_stagiaire');
         }
-
         //<---------- RENVOI L'AFFICHAGE DU FORMULAIRE ---------->
         return $this->render('stagiaire/add.html.twig', 
         [

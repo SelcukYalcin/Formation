@@ -22,10 +22,8 @@ class FormateurController extends AbstractController
     }
 
     //<---------- FONCTION AJOUTER ET EDITER UN FORMATEUR ---------->
-     /**
-     * @Route("/formateur/add", name="add_formateur")
-     * @Route("/formateur/{id}/edit", name="edit_formateur")
-     */
+    #[Route("/formateur/add", name:"add_formateur")]
+    #[Route("/formateur/{id}/edit", name:"edit_formateur")]
     public function add(ManagerRegistry $doctrine, Formateur $formateur = null, Request $request): Response 
     {
         if(!$formateur) 
@@ -56,9 +54,9 @@ class FormateurController extends AbstractController
             'edit' => $formateur->getId()
         ]);
     }
-
-    #[Route("/formateur/{id}/delFormateur", name:"delFormateur_formateur")]
+    
     //<---------- FONCTION SUPPRIMER UN FORMATEUR ---------->
+    #[Route("/formateur/{id}/delFormateur", name:"delFormateur_formateur")]
     public function delFormateur(ManagerRegistry $doctrine, Formateur $formateur)
     {
         $entityManager = $doctrine->getManager();

@@ -21,11 +21,9 @@ class CategorieController extends AbstractController
         ]);
     }
 
-            //<---------- FONCTION AJOUTER ET EDITER UNE CATEGORIE ---------->
-     /**
-     * @Route("/categorie/add", name="add_categorie")
-     * @Route("/categorie/{id}/edit", name="edit_categorie")
-     */
+    //<---------- FONCTION AJOUTER ET EDITER UNE CATEGORIE ---------->
+    #[Route("/categorie/add", name:"add_categorie")]
+    #[Route("/categorie/{id}/edit", name:"edit_categorie")]    
     public function add(ManagerRegistry $doctrine, categorie $categorie = null, Request $request): Response 
     {
         if(!$categorie) 
@@ -46,7 +44,6 @@ class CategorieController extends AbstractController
             $entityManager->flush();
             return $this->redirectToRoute('app_categorie');
         }
-
         //<---------- RENVOI L'AFFICHAGE DU FORMULAIRE ---------->
         return $this->render('categorie/add.html.twig', 
         [
@@ -57,27 +54,21 @@ class CategorieController extends AbstractController
         ]);
     }
 
-        /**
-     * @Route("categorie/{id}/remove", name="remove_categorie")
-     */
-    public function delete(ManagerRegistry $doctrine, Categorie $categorie) {
+    // #[Route("categorie/{id}/remove", name:"remove_categorie")]    
+    // public function delete(ManagerRegistry $doctrine, Categorie $categorie) {
+    //     $entityManager = $doctrine->getManager();
+    //     $entityManager->remove($categorie);
+    //     $entityManager->flush();
+    //     return $this->redirectToRoute('app_categorie');
+    // }
 
-        $entityManager = $doctrine->getManager();
-
-        $entityManager->remove($categorie);
-        $entityManager->flush();
-
-        return $this->redirectToRoute('app_categorie');
-    }
-
+    //<---------- FONCTION SUPPRIMER UNE CATEGORIE ---------->
     #[Route("/categorie/{id}/delCategorie", name:"delCategorie_categorie")]
-    //<---------- FONCTION SUPPRIMER UN CATEGORIE ---------->
     public function delCategorie(ManagerRegistry $doctrine, Categorie $categorie)
     {
         $entityManager = $doctrine->getManager();
         $entityManager->remove($categorie);
         $entityManager->flush();
-
         return $this->redirectToRoute('app_categorie');
     }
 

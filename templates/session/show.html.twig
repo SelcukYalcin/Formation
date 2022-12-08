@@ -7,7 +7,7 @@
 
 
     <div class="">
-        - Formateur référent : {{ session.formateur }}<br>
+        - Formateur référent : <a class="" href="{{ path('show_formateur', {'id': session.formateur.id})}}">{{ session.formateur }}</a><br>
         - Date de début : {{ session.dateDebut | date('d-m-Y') }}<br>
         - Date de fin : {{ session.dateFin | date('d-m-Y') }}<br>
         - Nombre de places : {{ session.nbPlace }}<br>
@@ -20,30 +20,39 @@
         <tr>
             <td>                
                 - {{ programmer.progMod.titreMod }}
-                ({{ programmer.duree }} Jours)
+                ({{ programmer.duree }} Jours) <br>
             </td>
-
         </tr>
         {% endfor %}
     </div>
 
     <div>
         <h3>Stagiaires inscrits</h3>
+        {% if session.inscrit | length == 0 %}
+        <p> Session sans stagiaire  </p>
+        {% else %}
         {% for stagiaire in session.inscrit %}
         <tr>
             <td>-<a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}"> {{ stagiaire }}<br></a></td>
         </tr>
         {% endfor %}
+        {% endif %}
     </div>
+        
 
     <div>
         <h3>Stagiaires non inscrits</h3>
         {% for stagiaire in nonInscrits %}
-            <td>-<a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}"> {{ stagiaire }}<br></a></td>
-            {# <td>-<a href="{{ path('add_stagiaire_session', {'idSt': stagiaire.id, 'idSe':session.id}) }}"> {{ stagiaire }}<br></a></td> #}
-
-            
+            <td>
+                -<a href="{{ path('show_stagiaire', {'id': stagiaire.id}) }}"> {{ stagiaire }} </a>
+            </td>
+            <td>        
+                <a href="{{ path('add_stagiaire_session', {'idSt': stagiaire.id, 'idSe':session.id}) }}">  <i class="fa-solid fa-user-plus"></i><br></a>
+            </td>            
         {% endfor %}
+    </div>
+
+    <div>
     </div>
 
 {% endblock %}

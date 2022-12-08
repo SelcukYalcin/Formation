@@ -14,24 +14,19 @@ class ModuleController extends AbstractController
 {
     #[Route('/module', name: 'app_module')]
     public function index(ManagerRegistry $doctrine): Response
-    {
-        
+    {       
         $modules = $doctrine->getRepository(Module::class)->findBy([], ['titreMod' => 'ASC']);
         return $this->render('module/index.html.twig', [
             'modules' => $modules,        ]);
     }
-
-
     
     #[Route("/module/add", name:"add_module")]
-    #[Route("/module/{id}/edit", name:"edit_module")]
-    
+    #[Route("/module/{id}/edit", name:"edit_module")]   
     public function add(ManagerRegistry $doctrine, Module $module = null, Request $request): Response
     {
         if(!$module) {
             $module = new Module();
         }
-
         $form = $this->createForm(ModuleType::class, $module);
         $form->handleRequest($request);
         if ($form->isSubmitted() && $form->isValid()) 
