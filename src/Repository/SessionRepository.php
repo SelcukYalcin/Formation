@@ -112,7 +112,7 @@ class SessionRepository extends ServiceEntityRepository
             ->from('App\Entity\Module','mod')
             ->where($nonProgramme->expr()->notIn('mod.id', $qb->getDQL()))
             ->setParameter('id', $session_id)
-            // ->orderBy('mod.titreMod');
+            ->orderBy('mod.titreMod');
 ;
         $query = $nonProgramme->getQuery();
         return $query->getResult();
