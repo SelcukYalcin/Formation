@@ -16,29 +16,42 @@
 
     <div>
         <h3>Modules de la Session</h3>
+        
+        {% if session.programmers | length == 0 %}
+        <p class="">Il n'y a pas de modules dans cette session</p>
+        {% else %}
         {% for programmer in session.programmers %}
             <tr>
                 <td>                
-                    - {{ programmer.progMod.titreMod }}
-                    ({{ programmer.duree }} Jours) <a href=""><i class="fa-solid fa-square-minus"></a></i><br>
+                    - {{ programmer.progMod }}
+                    ({{ programmer.duree }} Jours) <a href="{{ path('remove_programmer_session', {'idPr':programmer.id, 'idSe':session.id}) }}">
+                        <i class="fa-solid fa-square-minus"></i></a><br>
                 </td>
             </tr>
         {% endfor %}
+        {% endif %}
     </div>
 
     <div>
         <h3>Modules Ajoutables</h3> 
         {% for module in nonProgrammers %}
-             <p>- {{module ~ ' ' ~ module.categorie}} <a href=""><i class="fa-solid fa-square-plus"></a></i></p>
-             
-        {% endfor %} 
-        
+            <p>
+                - {{module ~ ' dans la catégorie ' ~ module.categorie}} 
+                <i class="fa-solid fa-square-plus"></a></i>
+            </p>
+
+            <form action="{{ path('add_programmer_session', {'idMod': module.id, 'idSe':session.id}) }}" method="post">
+                <input type="number" name="duree" id="duree" value="" min="1" required> 
+                <label for="">Jours</label>               
+                <button type="submit" value="ajouter">Ajouter<i class="fa-solid fa-square-plus"></i></button>           
+            </form>
+        {% endfor %}          
     </div>
 
     <div>
         <h3>Stagiaires inscrits</h3>
         {% if session.inscrit | length == 0 %}
-        <p> Session sans stagiaire  </p>
+        <p> Session sans stagiaires  </p>
             {% else %}
             {% for stagiaire in session.inscrit %}
             <tr>

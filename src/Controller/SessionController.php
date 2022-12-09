@@ -21,13 +21,15 @@ class SessionController extends AbstractController
     public function index(ManagerRegistry $doctrine): Response
     {
         $sessions = $doctrine->getRepository(Session::class)->findBy([], ['intitule' => 'ASC']);
-        return $this->render('session/index.html.twig', 
-            ['sessions' => $sessions,]);
+        return $this->render(
+            'session/index.html.twig',
+            ['sessions' => $sessions,]
+        );
     }
 
     //<---------- FONCTION AJOUTER ET EDITER UNE SESSION ---------->
-     #[Route("/session/add", name:"add_session")]
-     #[Route("/session/{id}/edit", name:"edit_session")]     
+    #[Route("/session/add", name: "add_session")]
+    #[Route("/session/{id}/edit", name: "edit_session")]
     public function add(ManagerRegistry $doctrine, Session $session = null, Request $request): Response
     {
         if (!$session) {
@@ -45,7 +47,8 @@ class SessionController extends AbstractController
             return $this->redirectToRoute('app_session');
         }
         //<---------- RENVOI L'AFFICHAGE DU FORMULAIRE ---------->
-        return $this->render('session/add.html.twig',
+        return $this->render(
+            'session/add.html.twig',
             [
                 //<---------- CREATION DE LA VUE DU FORMULAIRE ---------->
                 'formAddSession' => $form->createView(),
@@ -56,7 +59,7 @@ class SessionController extends AbstractController
     }
 
     //<---------- FONCTION SUPPRIMER UNE SESSION ---------->
-    #[Route("/session/{id}/delSession", name:"delSession_session")]
+    #[Route("/session/{id}/delSession", name: "delSession_session")]
     public function delSession(ManagerRegistry $doctrine, Session $session)
     {
         $entityManager = $doctrine->getManager();
@@ -67,12 +70,12 @@ class SessionController extends AbstractController
 
 
 
-        /**
+    /**
      * @Route("/session/addStagiaire/{idSe}/{idSt}", name="add_stagiaire_session", requirements={"idSe"="\d+", "idSt"="\d+"})
      * @ParamConverter("session", options={"mapping": {"idSe": "id"}})
      * @ParamConverter("stagiaire", options={"mapping": {"idSt": "id"}})
      */
-    public function addStagiaire(ManagerRegistry $doctrine, Session $session, Stagiaire $stagiaire) 
+    public function addStagiaire(ManagerRegistry $doctrine, Session $session, Stagiaire $stagiaire)
     {
 
         $entitytManager = $doctrine->getManager();
@@ -82,13 +85,13 @@ class SessionController extends AbstractController
 
         return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
     }
-    
-     /**
+
+    /**
      * @Route("/session/removeStagiaire/{idSe}/{idSt}", name="remove_stagiaire_session", requirements={"idSe"="\d+", "idSt"="\d+"})
      * @ParamConverter("session", options={"mapping": {"idSe": "id"}})
      * @ParamConverter("stagiaire", options={"mapping": {"idSt": "id"}})
      */
-    public function removeStagiaire(ManagerRegistry $doctrine, Session $session, Stagiaire $stagiaire) 
+    public function removeStagiaire(ManagerRegistry $doctrine, Session $session, Stagiaire $stagiaire)
     {
         // $session = $doctrine->getRepository(Session::class)->find($request->attributes->get('idSe'));
         $entitytManager = $doctrine->getManager();
@@ -97,23 +100,24 @@ class SessionController extends AbstractController
         $entitytManager->flush();
 
         return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
-    }   
+    }
 
     /**
      * @Route("/session/addProgrammer/{idSe}/{idMod}", name="add_programmer_session", requirements={"idSe"="\d+", "idMod"="\d+"})
      * @ParamConverter("session", options={"mapping": {"idSe": "id"}})
-     * @ParamConverter("programmer", options={"mapping": {"idProgrammer": "id"}})
+     * @ParamConverter("module", options={"mapping": {"idMod": "id"}})
      */
-    public function addProgrammer(ManagerRegistry $doctrine, Request $request, Session $session, Module $module) 
+    public function addProgrammer(ManagerRegistry $doctrine, Request $request, Session $session, Module $module)
     {
         $entityManager = $doctrine->getManager();
         $prog = new Programmer();
+        $duree = $request->request->get('duree');
         $prog->setProgses($session);
         $prog->setProgMod($module);
-        $duree = $request->request->get('duree');       
-        $prog->setDuree($duree);        
+        
+        $prog->setDuree($duree);
         $entityManager->persist($prog);
-        $entityManager->flush(); 
+        $entityManager->flush();
 
         return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
     }
@@ -121,9 +125,9 @@ class SessionController extends AbstractController
     /**
      * @Route("/session/removeProgrammer/{idSe}/{idPr}", name="remove_programmer_session", requirements={"idSe"="\d+", "idPr"="\d+"})
      * @ParamConverter("session", options={"mapping": {"idSe": "id"}})
-     * @ParamConverter("programmer", options={"mapping": {"idProgrammer": "id"}})
+     * @ParamConverter("programmer", options={"mapping": {"idPr": "id"}})
      */
-    public function removeProgrammer(ManagerRegistry $doctrine, Session $session, Programmer $programmer) 
+    public function removeProgrammer(ManagerRegistry $doctrine, Session $session, Programmer $programmer)
     {
         $session->removeProgrammer($programmer);
         $entityManager = $doctrine->getManager();
@@ -132,7 +136,7 @@ class SessionController extends AbstractController
 
         return $this->redirectToRoute('show_session', ['id' => $session->getId()]);
     }
-    
+
     //<---------- FONCTION AFFICHER SESSION ---------->
     #[Route("/session/{id}", name: "show_session")]
     public function show(Session $session, SessionRepository $sr): Response
@@ -140,11 +144,13 @@ class SessionController extends AbstractController
         $session_id = $session->getId();
         $nonInscrits = $sr->findNonInscrits($session_id);
         $nonProgramme = $sr->findNonProgrammers($session_id);
-        return $this->render('session/show.html.twig', 
-        [
-            'session' => $session,
-            'nonInscrits' => $nonInscrits,
-            'nonProgrammers' => $nonProgramme
-        ]);
+        return $this->render(
+            'session/show.html.twig',
+            [
+                'session' => $session,
+                'nonInscrits' => $nonInscrits,
+                'nonProgrammers' => $nonProgramme
+            ]
+        );
     }
 }

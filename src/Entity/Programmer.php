@@ -65,8 +65,8 @@ class Programmer
         return $this;
     }
 
-    public function __toString()
-    {
-        return $this->progMod;
-    }
+    // public function __toString()
+    // {
+    //     return $this->progMod;
+    // }
 }
